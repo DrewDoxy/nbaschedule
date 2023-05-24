@@ -1,0 +1,78 @@
+import random
+
+east_teams = ["Celtics", "Knicks", "Sixers", "Nets", "Raptors", "Bulls", "Bucks", "Pistons", "Pacers", "Cavaliers", "Heat", "Wizards", "Hawks", "Magic", "Hornets"]
+west_teams = ["Suns", "Grizzlies", "Warriors", "Mavericks", "Jazz", "Nuggets", "Wolves", "Pelicans", "Clippers", "Spurs", "Lakers", "Kings", "Blazers", "Thunder", "Rockets"]
+atl = ["Celtics", "Knicks", "Sixers", "Nets", "Raptors"]
+ctl = ["Bulls", "Bucks", "Cavs", "Pacers", "Pistons"]
+se = ["Heat", "Hawks", "Hornets", "Magic", "Wizards"]
+pac = ["Suns", "Warriors", "Lakers", "Clippers", "Kings"]
+nw = ["Nuggets", "Thunder", "Wolves", "Jazz", "Blazers"]
+sw = ["Rockets", "Spurs", "Mavericks", "Pelicans", "Grizzlies"]
+# Create a list of matchups
+matchups = []
+
+for team1 in east_teams:
+    for team2 in west_teams:
+        matchups.append((team1, team2))  # Add the matchup with East team as home team
+
+for team1 in west_teams:
+    for team2 in east_teams:
+        matchups.append((team1, team2))  # Add the matchup with West team as home team
+
+for team1 in east_teams:
+    for team2 in east_teams:
+        if team1 in atl:
+            if team1 != team2:
+                matchups.append((team1, team2))     # Ensures that each division team plays each other four times
+                matchups.append((team2, team1))     # Home and away matchups in addition to the conference home and away
+
+# Repeat for each division
+for team1 in east_teams:
+    for team2 in east_teams:
+        if team1 in ctl:
+            if team1 != team2:
+                matchups.append((team1, team2))
+                matchups.append((team2, team1))
+
+for team1 in east_teams:
+    for team2 in east_teams:
+        if team1 in se:
+            if team1 != team2:
+                matchups.append((team1, team2))
+                matchups.append((team2, team1))
+
+for team1 in west_teams:
+    for team2 in west_teams:
+        if team1 in sw:
+            if team1 != team2:
+                matchups.append((team1, team2))
+                matchups.append((team2, team1))
+
+for team1 in west_teams:
+    for team2 in west_teams:
+        if team1 in pac:
+            if team1 != team2:
+                matchups.append((team1, team2))
+                matchups.append((team2, team1))
+
+for team1 in west_teams:
+    for team2 in west_teams:
+        if team1 in nw:
+            if team1 != team2:
+                matchups.append((team1, team2))
+                matchups.append((team2, team1))
+
+random.shuffle(matchups)  # Randomize the order of matchups
+
+# Print the schedule
+for matchup in matchups:
+    home_team, away_team = matchup
+    print(home_team + " vs. " + away_team)
+
+total_games = len(matchups)
+print("\nTotal number of games =", total_games) # Prints 1,260, which is about 30 more than the actual number of games
+
+# One thing I need to finish this project
+# is a way to make it so that each team has one other team in the same conference
+# that they play 3 times
+
